@@ -26,9 +26,9 @@ This repository contains all the code I wrote for the web application, which uti
 
 *Images of Web Application*
 
-![ScreenShot](/assets_readme/home.png)
-![ScreenShot](/assets_readme/menu.png)
-![ScreenShot](/assets_readme/managetables.png)
-![ScreenShot](/assets_readme/bill.png)
-![ScreenShot](/assets_readme/inventory.png)
-![ScreenShot](/assets_readme/sales_consumption_charts.png)
+![home_page](/assets_readme/home.png)
+![menu_page](/assets_readme/menu.png)
+![table_manager_page](/assets_readme/managetables.png)
+![bill_summary_page](/assets_readme/bill.png)
+![inventory_page](/assets_readme/inventory.png)
+![charts_page](/assets_readme/sales_consumption_charts.png)
