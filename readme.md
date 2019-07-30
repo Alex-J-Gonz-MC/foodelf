@@ -26,9 +26,9 @@ This repository contains all the code I wrote for the web application, which uti
 
 *Images of Web Application*
 
-![home_page](/assets_readme/home.png)
-![menu_page](/assets_readme/menu.png)
-![table_manager_page](/assets_readme/managetables.png)
-![bill_summary_page](/assets_readme/bill.png)
-![inventory_page](/assets_readme/inventory.png)
-![charts_page](/assets_readme/sales_consumption_charts.png)
+![home_page](https://github.com/Alex-J-Gonz-MC/foodelf_django/blob/master/assets_readme/home.PNG)
+![menu_page](https://github.com/Alex-J-Gonz-MC/foodelf_django/blob/master/assets_readme/menu.PNG)
+![table_manager_page](https://github.com/Alex-J-Gonz-MC/foodelf_django/blob/master/assets_readme/managetables.PNG)
+![bill_summary_page](https://github.com/Alex-J-Gonz-MC/foodelf_django/blob/master/assets_readme/bill.PNG)
+![inventory_page](https://github.com/Alex-J-Gonz-MC/foodelf_django/blob/master/assets_readme/inventory.PNG)
+![charts_page](https://github.com/Alex-J-Gonz-MC/foodelf_django/blob/master/assets_readme/sales_consumption_charts.PNG)
