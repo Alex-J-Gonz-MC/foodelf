@@ -1,0 +1,109 @@
+{% load static%}
+<html lang="en">
+    <head>
+        <title>FoodELF: Home Page</title>
+        <link rel="stylesheet" type="text/css" href="{% static "manageTables/css/tableView.css" %} ">
+        <style type = "text/css">
+        @font-face {
+            font-family: Quicksand-Regular;
+            {% load static %}
+            src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+        }
+         body {
+           font-family: Quicksand-Regular;
+         }
+        </style>
+    </head>
+    <body>
+        {#error message popup #}
+        {% if error_message %}
+            <div class="form-popup" id="errorForm" align="center" style="display:inline-block;">
+                <form  action="{% url "manageTables:index" %}"class="form-container">
+                        <h1>ERROR</h1>
+
+                        <p><strong> {{ error_message }} </strong><p>
+                        <button type="submit" class="btn cancel" >x CLOSE</button>
+                </form>
+            </div>
+            <div class="row">
+
+        {% endif %}
+
+        <br><br>
+        {% load static %}
+        <img src="{% static "manageTables/logoagain.PNG" %}" class="center" height="100"><br><br><br>
+
+        {#  --------------------------------------------------------------------------------- #}
+
+        <div class="form-popup" id="myForm" align="center" style="font-family: Quicksand-Regular;">
+            <div class="popup-container" align="center">
+                <form class="form-container" width="450" action="{% url 'manageTables:createTable' %}" method="POST">
+                        <h1>New Table</h1>
+                        {% csrf_token %}
+                        {{ form }}
+                        {#<label for="tableNum"><b>Table Number</b></label>#}
+                        {#<input type="text" placeholder="Enter Table Number" name="tableNum" required>#}
+
+                        {#<label for="server"><b>Server</b></label>#}
+                        {#<input type="text" placeholder="Enter Server" name="server" required>#}
+                        <br>
+                        <button type="submit" class="btn" style="font-family: Quicksand-Regular;">CREATE TABLE</button>
+                        <button style="font-family: Quicksand-Regular;" type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
+
+                </form>
+
+                    <table class="queue" id="queueList" style="font-family: Quicksand-Regular;">
+                               <thead>
+                                   <tr><td>Queue#</td><td>Name</td></tr>
+                               </thead>
+                           <tbody>
+                               {% for q in queue %}
+                                   <tr>
+                                       <td>{{q}}</td>
+                                       <td>{{q}}</td>
+                                   </tr>
+                               {% endfor %}
+                           </tbody>
+                   </table>
+                </div>
+        </div>
+        <div id='overlay' class='overlay' style="display:none;"></div>
+
+
+
+        {#  --------------------------------------------------------------------------------- #}
+
+        <div id="tableList" class="row" style="font-family: Quicksand-Regular;">
+        {% for table in table_list %}
+            <a href="{% url 'manageTables:summary' table.id %}">
+                <div class="column">
+                    <div class="card">
+                        <h3>TABLE {{table.id}}</h3>
+                        <p>Server: {{table.server.name}}</p>
+
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        </div>
+
+        <div class="navbar" style="font-family: Quicksand-Regular;">
+            <a href="{% url "home:index" %}" class="home">HOME</a>
+            <a href="{% url "manageTables:index" %}">MANAGE TABLES</a>
+            <a href="{% url 'manageInventory:inventoryMain' %}">MANAGE INVENTORY</a>
+            <a href="{% url 'operationsResearch:index' %}">OPERATIONS RESEARCH</a>
+            <a href="#" onclick="openForm(); return false;" class="active">ADD TABLE</a>
+            <a href="#contact" class="active">CLOSEOUT</a>
+        </div>
+
+        {#  --------------------------------------------------------------------------------- #}
+        <script>
+                function openForm() {document.getElementById("myForm").style.display = "block";
+                                     document.getElementById("queueList").style.display = "block";}
+
+                function closeForm() {document.getElementById("myForm").style.display = "none";
+                                      document.getElementById("queueList").style.display = "none";}
+        </script>
+
+    </body>
+</html>

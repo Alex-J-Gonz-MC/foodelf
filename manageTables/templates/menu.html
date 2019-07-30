@@ -1,0 +1,34 @@
+<!--<!DOCTYPE html>-->
+{% load static%}
+<html lang="en">
+    <head>
+        <title>FoodElf</title>
+        <link rel="stylesheet" type="text/css" href="{% static "manageTables/css/menu.css" %} ">
+        <style type = "text/css">
+@font-face {
+    font-family: Quicksand-Regular;
+    {% load static %}
+    src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+}
+ body {
+   font-family: Quicksand-Regular;
+ }
+</style>
+    </head>
+    <body>
+        <h1>MENU</h1>
+        <table width="80%" border="1" cellpadding="5" >
+            <tr>
+                <th>ITEM #</th>
+                <th>NAME</th>
+            </tr>
+            {% for item in item_list %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td><a href="{% url 'manageTables:addItemToBill' table.id item.id %}">{{item.item_name}}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {#<button type="button" class="abs_btn">Im Absolute BABY!!!</button>#}
+    </body>
+</html>

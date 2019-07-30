@@ -1,0 +1,24 @@
+h1 {
+  text-align: center;
+  font-family: "Quicksand-Regular";
+}
+
+table {
+  text-align: center;
+  margin-left: 10%;
+  font-size: 25px;
+  font-family: "Quicksand-Regular";
+}
+
+.abs_btn {
+  width: 100px;
+  height: 50px;
+  position: fixed;
+  left: 90%;
+  top: 90%;
+}
+
+@font-face {
+  font-family: "Quicksand-Regular";
+  src: url("foodelf/manageTables/static/manageTables/fonts/Quicksand-Regular.otf");
+}

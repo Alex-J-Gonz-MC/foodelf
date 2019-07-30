@@ -1,0 +1,168 @@
+<!--<!DOCTYPE html>-->
+<html lang="en">
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+        <title>FoodELF: Charts</title>
+    </head>
+    <body>
+        <br><br>
+        {% load static %}
+        {#<img src="{% static "operationsResearch/logoagain.PNG" " align="center" height="100"><br><br><br>#}     
+        <div>
+            <canvas id="myChart" class="container"><p>Chart Unavailable</p></canvas>
+        </div>
+        <div>
+            <canvas id="ingredChart" class="container"><p>Chart Unavailable</p></canvas>
+        </div>
+        
+        <div>
+            <canvas id="line" class="container" ><p>Chart Unavailable</p></canvas>
+        </div>
+        
+        <script>
+            var myChart = document.getElementById('myChart').getContext('2d');
+            var massPopChart = new Chart(myChart, {
+                type:'bar',
+                data:{
+                    labels:{{items|safe}},
+                    datasets:[{
+                        label:'Purchases',
+                        data:{{counts}},
+                        //backgroundColor:'green',
+                        backgroundColor:[
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)',
+                            'rgba(200,255,12,0.7)',
+                            'rgba(50,154,255,0.7)',
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)',
+                            'rgba(200,255,12,0.7)',
+                            'rgba(50,154,255,0.7)',
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)'
+                        ]
+                    }]
+                }
+            });
+        </script>
+        <script>
+            var myChart = document.getElementById('ingredChart').getContext('2d');
+            var massPopChart = new Chart(myChart, {
+                type:'bar',
+                data:{
+                    labels:{{ingreds|safe}},
+                    datasets:[{
+                        label:'Purchases',
+                        data:{{ingred_counts}},
+                        //backgroundColor:'green',
+                        backgroundColor:[
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)',
+                            'rgba(200,255,12,0.7)',
+                            'rgba(50,154,255,0.7)',
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)',
+                            'rgba(200,255,12,0.7)',
+                            'rgba(50,154,255,0.7)',
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)',
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)',
+                            'rgba(200,255,12,0.7)',
+                            'rgba(50,154,255,0.7)',
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)',
+                            'rgba(200,255,12,0.7)',
+                            'rgba(50,154,255,0.7)',
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)',
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)',
+                            'rgba(200,255,12,0.7)',
+                            'rgba(50,154,255,0.7)',
+                            'rgba(255,99,120,0.7)',
+                            'rgba(212,162,35,0.7)',
+                            'rgba(75,192,192,0.7)',
+                            'rgba(153,102,255,0.7)'
+                        ]
+                    }]
+                }
+            });
+        </script>
+        <script>
+        
+                var timeFormat = 'YYYY-MM-DD HH:mm:ss.SSSSSS+-HH:mm';
+
+                function newDateString(days) {
+                    var arr = [];
+                    for(var x = 0;x < days.length;x++)
+                    {
+                        arr.push(moment(days[x]).toDate());
+                    }
+                    return arr;
+                }
+
+        
+            var myChart = document.getElementById('line').getContext('2d');
+            var itemChart = new Chart(myChart, {
+                type:'line',
+                data:{
+                    labels:newDateString({{dates|safe}}),
+                    datasets:[{
+                        label:'Profits',
+                        data:{{profits}},
+                        backgroundColor:'green'
+                    }]
+                },
+                options:{
+                    elements:{
+                        line:{
+                            tension:0
+                        },
+                    scales:{
+                        xAxes:[{
+                          type:'time',
+                          time:{
+                            displayFormats:{
+                                month:'MMM YYYY'
+                            },
+                            parser:timeFormat,
+                            tooltipFormat:'ll HH:mm'
+                          },
+                          distribution:'linear',
+                          ticks:{
+                            source:'auto'
+                          }
+                        }]
+                    }
+                    }
+                }
+            });
+        </script>
+
+    </body>
+</html>
+
+

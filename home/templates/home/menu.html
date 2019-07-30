@@ -1,0 +1,83 @@
+<!--<!DOCTYPE html>-->
+<html lang="en">
+    <head>
+        <title>FoodELF_Menu:JasperDeli</title>
+        <style type="text/css">
+        @font-face {
+            font-family: Quicksand-Regular;
+            {% load static %}
+            src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+        }
+            h1 {text-align:center;
+            font-family: Quicksand-Regular;}
+            table {text-align:center;
+                   font-size:25px;
+                 font-family: Quicksand-Regular;
+                 border: 1px white;
+                  border-collapse: collapse;
+               }
+            tr:nth-child(even) {background-color: #E0F8EC}
+            .abs_btn{width:100px;
+                     height:50px;
+                     position:fixed;
+                     left:90%;
+                     top:90%;}
+                     .navbar {overflow: hidden;
+                              background-color: #19C496;
+                              position: fixed;
+                              bottom: 0;
+                              width: 100%;
+                              color: #1D6055;
+                              font-family: "Quicksand-Regular";}
+
+                     .navbar a {float: left;
+                                display: block;
+                                color: #1D6055;
+                                text-align: center;
+                                padding: 14px 16px;
+                                text-decoration: none;
+                                font-size: 17px;}
+
+                     .navbar a:hover {background: #6BEFCC;
+                                      color: #E1FBF4;}
+                     .navbar a.active:hover {background: #6BEFCC;
+                                      color: #E1FBF4;}
+
+                     .navbar a.home {background-color: #1D6055;
+                                       color: #19C496;}
+                     .navbar a.active {background-color: #19C496;
+                                       color: #1D6055;
+                                       border-right: none;}
+        </style>
+    </head>
+    <body>
+      {% load static %}
+        <h1>MENU</h1>
+        <table width="80%" border="1" cellpadding="5" align="center">
+            <tr>
+                <th>ITEM #</th>
+                <th>PHOTO</th>
+                <th>NAME</th>
+                <th>PRICE</th>
+                <th>DESCRIPTION</th>
+            </tr>
+            {% for item in item_list %}
+                <tr>
+                    <td>{{item.id}}</td>
+                    <td>{{item.image}}</td>
+                    <td><a href="{% url 'home:detail' item.id %}">{{item.item_name}}</a></td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.vegan}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <!--<button type="button" class="abs_btn">Im Absolute BABY!!!</button-->
+        <div class="navbar" style="font-family: Quicksand-Regular;">
+          {% load static %}
+            <a href="{% url "home:index" %}" class="home">HOME</a>
+            <a href="{% url "manageTables:index" %}">MANAGE TABLES</a>
+            <a href="{% url 'manageInventory:inventoryMain' %}">MANAGE INVENTORY</a>
+            <a href="#contact">OPERATIONS RESEARCH</a>
+        </div>
+    </body>
+</html>

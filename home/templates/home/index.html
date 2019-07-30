@@ -1,0 +1,79 @@
+<!--<!DOCTYPE html>-->
+<html lang="en">
+    <head>
+        <title>FoodELF: Home Page</title>
+        <style type="text/css">
+            @font-face {
+                font-family: Quicksand-Regular;
+                {% load static %}
+                src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+            }
+            body {background-color:white;
+            font-family: Quicksand-Regular;}
+            h1 {text-align:center;
+            font-family: Quicksand-Regular;}
+            table {text-align:center;
+                   margin-left:30%;}
+            button {background-color: #19C496;
+                    border-radius: 9px;
+                    font-family: Quicksand-Regular;
+                    font-size: 30px;
+                    color: white;
+                    padding: 12px 18px;
+                    border: none;
+                    cursor: pointer;
+                    width: 100%;
+                    opacity: 0.9;}
+            .center {display: block;
+                     margin-left: auto;
+                     margin-right: auto;}
+
+        </style>
+    </head>
+    <body>
+        <br><br>
+        {% load static %}
+        <img src="{% static "home/logoagain.PNG" %}" class="center" height="100"><br><br><br>
+
+
+        <form id="menuPage" action="{% url 'home:menu' %}" method="POST">{% csrf_token %}</form>
+        <form id="tablesPage" action="{% url 'manageTables:index' %}" method="POST">{% csrf_token %}</form>
+        <form id="inventoryPage" action="{% url 'manageInventory:inventoryMain' %}" method="POST">{% csrf_token %}</form>
+        <form id="opPage" action="{% url 'operationsResearch:index' %}" method="POST">{% csrf_token %}</form>
+        <form id="populateApp" action="{% url 'home:populateFoodElf' %}" method="POST">{% csrf_token %}</form>
+
+
+        <table width="40%" cellspacing="25" >
+            <tr><td><button type="submit" form="menuPage">MENU</button></td></tr>
+            <tr><td><button type="submit" form="tablesPage">MANAGE TABLES</button></td></tr>
+            <tr><td><button type="submit" form="inventoryPage">MANAGE INVENTORY</button></td></tr>
+            <tr><td><button type="submit" form="opPage">OPERATIONS RESEARCH</button></td></tr>
+            <tr><td><button type="submit" form="populateApp">POPULATE FOODELF</button></td></tr>
+        </table>
+
+
+
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{# {% if item_list  #}
+    {# <ul> #}
+    {# {% for item in item_list  #}
+        {# <li><a href="{% url 'home:detail' item.id ">{{item.item_name}}</a></li> <!--href=" url 'home:detail' item.id " #}
+    {# {% endfor  #}
+    {# </ul> #}
+{# {% else  #}
+    {# <p>No items are available.</p> #}
+{# {% endif  #}

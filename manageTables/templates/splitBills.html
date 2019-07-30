@@ -1,0 +1,46 @@
+{% load static%}
+{% load humanize %}
+{% load manageTables_filter %}
+<html lang="en">
+    <head>
+        <title>FoodELF_Menu:JasperDeli</title>
+        <link rel="stylesheet" type="text/css" href="{% static "manageTables/css/splitBills.css" %} ">
+        <style type = "text/css">
+@font-face {
+    font-family: Quicksand-Regular;
+    {% load static %}
+    src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+}
+ body {
+   font-family: Quicksand-Regular;
+ }
+</style>
+    </head>
+    <body>
+        <h1 align="center">BILLS FOR TABLE {{table_id}}</h1>
+
+        <div id="bill_List" class="row" style="font-family: Quicksand-Regular;">
+        {% for person in customers %}
+                <div class="column">
+                    <div class="card" style="font-family: Quicksand-Regular;">
+                        <h2 align="center" style="font-family: Quicksand-Regular;">{{person.name}}</h2>
+                        <table align="center" cellpadding="10" style="font-family: Quicksand-Regular;">
+                            {% for choice in person|getChoices %}
+                            <tr>
+                                <td style="font-family: Quicksand-Regular;">{{choice.item.item_id}}</td>
+                                <td style="font-family: Quicksand-Regular;">{{choice.item.item_name}}</td>
+                                <td style="font-family: Quicksand-Regular;">$ {{choice.item.price}}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <p align="center" style="font-family: Quicksand-Regular;"><strong>Total: $ {{person|calculateTotal}}</strong></p>
+                    </div>
+                </div>
+        {% endfor %}
+        </div>
+
+        <form action="{%url "manageTables:closeoutTable" table_id %}">
+            <button style="font-family: Quicksand-Regular;" type="submit" class="abs_btn">CLOSEOUT</button>
+        </form>
+    </body>
+</html>

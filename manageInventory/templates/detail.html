@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title>Preferences Output</title>
+        <style type = "text/css">
+        @font-face {
+            font-family: Quicksand-Regular;
+            {% load static %}
+            src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+        }
+         body {
+           font-family: Quicksand-Regular;
+         }
+        </style>
+</head>
+    </head>
+    <body>
+        <h1>Preferences</h1><br>
+
+        <form action="{% url 'manageInventory:prefOut' %}" method="POST">
+            {% csrf_token %}
+            {{form}}
+
+            <button type="submit">Submit</button>
+        </form>
+
+    </body>
+
+</html>

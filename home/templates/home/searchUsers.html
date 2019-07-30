@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>SQL Injection Tutorial</title>
+    </head>
+    <body>
+        <h1 align="center">USERS.com</h1><br>
+        <div align="center">
+            <form action="{% url 'home:showUser' %}" method="POST">
+            {% csrf_token %}
+            {{searchForm}}
+            <button type="submit">Search</button>
+            </form>
+        </div>
+        
+        {% if user_list %}
+        
+        <table align="center">
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Bank Account #</th>
+            </tr>
+            {% for user in user_list %}
+            <tr>
+                <td>{{user.name}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.bank_account_number}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+        {% endif %}
+    </body>
+    
+</html>

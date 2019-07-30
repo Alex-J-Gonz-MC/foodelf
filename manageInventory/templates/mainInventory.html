@@ -1,0 +1,111 @@
+<!--<!DOCTYPE html>-->
+{% load static%}
+{%load humanize%}
+<html lang="en">
+    <head>
+        <title>FoodELF_Menu:JasperDeli</title>
+        <link rel="stylesheet" type="text/css" href="{% static "manageInventory/css/mainInventory.css" %} ">
+        <style type = "text/css">
+@font-face {
+    font-family: Quicksand-Regular;
+    {% load static %}
+    src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+}
+ body {
+   font-family: Quicksand-Regular;
+ }
+</style>
+    </head>
+    <body>
+        <h1>MENU</h1>
+        <table width="70%" border="1" cellpadding="5" margin: auto; align="center">
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>UNITS</th>
+                <th>PRICE PER UNIT</th>
+                <th>SAFETY STOCK</th>
+                <th>DATE PURCHASED</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for item in inventory %}
+                <tr>
+                    <td>{{item.inventory_id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.units}}</td>
+                    <td>$ {{item.price_per_unit|floatformat:2}}</td>
+                    <td>{{item.safety_stock}}</td>
+                    <td>{{item.date_purchased}}</td>
+                    <td><a href="#" onclick=" openForm(); getPopulatedForm({{item.inventory_id}});">Edit Info</a></td>
+                    <td><a href="#" onclick=" openForm2(); getAddStockForm({{item.inventory_id}})">Add Stock</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {#<button type="button" class="abs_btn">Im Absolute BABY!!!</button>#}
+
+        <div class="form-popup" id="myForm" align="center">
+            <div class="popup-container" align="center">
+                <form id="ingred_form" class="form-container" width="450" action="{#{% url 'manageInventory:editInventory'#} %}" method="POST">
+                        <h1>Edit Inventory Info</h1>
+                        {% csrf_token %}
+                        {{ editForm }}
+                        <br>
+                        <button type="submit" class="btn">UPDATE INFO</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
+
+                </form>
+                </div>
+        </div>
+        <div id='overlay2' class='overlay' style="display:none;"></div>
+        <div class="form-popup" id="myForm2" align="center">
+            <div class="popup-container" align="center">
+                <form id="ingred_form2" class="form-container" width="450" action="{#{% url 'manageInventory:editInventory'#} %}" method="POST">
+                        <h1>Edit Inventory Info</h1>
+                        {% csrf_token %}
+                        {{ stockForm}}
+                        <br>
+                        <button type="submit" class="btn">UPDATE INFO</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
+
+                </form>
+                </div>
+        </div>
+        <div id='overlay' class='overlay' style="display:none;"></div>
+
+
+        <script>
+                function openForm() {document.getElementById("myForm").style.display = "block";}
+                function openForm2() {document.getElementById("myForm2").style.display = "block";}
+
+                function closeForm2() {document.getElementById("myForm2").style.display = "none";}
+                function closeForm() {document.getElementById("myForm").style.display = "none";}
+
+
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            function getPopulatedForm(ingredient) {
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'manageInventory:populateForm' %}",
+                    data: {'ingred_id': ingredient}
+                })
+                .done(function(response) {
+                    $('#ingred_form').replaceWith(response);})}
+        </script>
+         <script>
+            function getAddStockForm(ingredient) {
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'manageInventory:getAddStockForm' %}",
+                    data: {'ingred_id': ingredient}
+                })
+                .done(function(response) {
+                    $('#ingred_form2').replaceWith(response);})}
+        </script>
+
+
+
+    </body>
+</html>

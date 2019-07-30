@@ -1,0 +1,54 @@
+<html>
+    {% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %}
+    <head>
+        <title>{{item.item_name}}</title>
+        <style type = "text/css">
+        @font-face {
+            font-family: Quicksand-Regular;
+            {% load static %}
+            src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+        }
+        table {text-align:center;
+               font-size:25px;
+             font-family: Quicksand-Regular;
+             border: 1px white;
+              border-collapse: collapse;
+           }
+           tr:nth-child(odd) {background-color: #E0F8EC}
+         body {
+           font-family: Quicksand-Regular;
+           font-size: 14pt
+           text-align: center;
+         }
+        </style>
+    </head>
+    <body>
+        <h1>{{item.item_name}}</h1><br>
+
+        <table border="1" align="center">
+            <tr>
+                <td><strong>Item #:</strong></td>
+                <td>{{item.item_id}}</td>
+            </tr>
+            <tr>
+                <td><strong>Price:</strong></td>
+                {% load humanize %}
+                <td>${{item.price|floatformat:2|intcomma}}</td>
+            </tr>
+            <tr>
+                <td><strong>Ingredients:</strong></td>
+                <td>{{item.ingredients}}</td>
+            </tr>
+        </table><br>
+
+        <form action="{% url 'home:purchase' item.id %}" method="POST" align="center">
+            {% csrf_token %}
+            <p>Quantity:</p>
+            <input type="text" name="textfield">
+            <button type="submit">Purchase</button>
+        </form>
+
+        <a href="{% url 'home:menu' %}">Go Back</a>
+    </body>
+
+</html>

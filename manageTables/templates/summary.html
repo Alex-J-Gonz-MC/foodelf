@@ -1,0 +1,138 @@
+<!--<!DOCTYPE html>-->
+{% load static %}
+<html lang="en">
+    <head>
+        <title>FoodELF_Menu:JasperDeli</title>
+        <link rel="stylesheet" type="text/css" href="{% static "manageTables/css/summary.css" %} ">
+        <style type = "text/css">
+        @font-face {
+            font-family: Quicksand-Regular;
+            {% load static %}
+            src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+        }
+         body {
+           font-family: Quicksand-Regular;
+         }
+         .navbar, table{
+           font-family: Quicksand-Regular;
+         }
+        </style>
+    </head>
+    <body>
+        <h1>TABLE {{table_id}} BILL SUMMARY</h1>
+        <div class="parent-div" style="font-family: Quicksand-Regular;">
+            <table width="15%" class="customer" id="_CustomerList" style="font-family: Quicksand-Regular;">
+                <thead>
+                <tr><th>Customers</th></tr>
+                </thead>
+                <tbody id="_cbody">
+                {% for customer in customer_list %}
+                        <tr>
+                            <td>{{customer.name}}</td>
+                        </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <table border="1" cellpadding="5" class="bill" >
+                <thead>
+                    <tr>
+                        <th>Item No.</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Assigned To:</th>
+                    </tr>
+                </thead>
+                <tbody style="font-family: Quicksand-Regular;">
+                    {% for item,choice in choice_and_item %}
+                        <tr>
+                            <td>{{item.id}}</td>
+                            <td><a href="#" onmouseover="showDescription(&quot;descript{{item.item_id}}&quot;);" onmouseout="closeDescription(&quot;descript{{item.item_id}}&quot;);">{{item.item_name}}</a></td>
+                            {% load humanize %}
+                            <td>$ {{item.price|floatformat:2}}</td>
+                            <td>{{choice.customer.name}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot style="align:right">
+                    <td></td>
+                    <td><a href="#" onClick="openForm(); return false;">+ ADD ITEM</a></td>
+                    <td></td>
+                    <td></td>
+                </tfoot>
+            </table>
+            {% get_static_prefix as STATIC_URL %}
+            <div class="description-container" style="font-family: Quicksand-Regular;">
+                {% for item in ordered_items %}
+                <div class="description" id="descript{{item.item_id}}">
+                    <img src="{{STATIC_URL}}images/{{item.image}}" height="200" width="300" style="margin-left:7%;">
+                    <p class="desc"><strong>{{item.item_name}}</strong></p>
+                    <p class="desc">Price: {{item.price|floatformat:2}}</p>
+                    <p class="desc">Calories: {{item.calories}}</p>
+                    <p class="desc">Vegan: {{item.description}}</p>
+                    <p class="desc">Description: {{item.vegan}}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        <br><br>
+        <p class="total">Total: $ {{subtotal|floatformat:2}}</p>
+        {#<button type="button" class="abs_btn">CHECKOUT</button>#}
+
+
+        <div class="form-popup" id="myForm" align="center" >
+            <table class="popup-Menu" width="100%" border="1" cellpadding="5" >
+                    <tr>
+                        <th>ITEM #</th>
+                        <th>NAME</th>
+                        <th>PRICE</th>
+                    </tr>
+                    {% for item in menu_list %}
+                        <tr>
+                            <td>{{item.id}}</td>
+                            <td><a href="{% url 'manageTables:addItemToBill' table_id item.id %}">{{item.item_name}}</a></td>
+                            <td>$ {{item.price|floatformat:2}}</td>
+                        </tr>
+                    {% endfor %}
+            </table>
+            <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
+        </div>
+        <div id='overlay' class='overlay' style="display:none;"></div>
+
+
+        <div class="navbar">
+            <a href="{% url "home:index" %}" class="home">HOME</a>
+            <a href="{% url "manageTables:index" %}">MANAGE TABLES</a>
+            <a href="{% url 'manageInventory:inventoryMain' %}">MANAGE INVENTORY</a>
+            <a href="#contact">OPERATIONS RESEARCH</a>
+            <a href="#" onclick="openForm(); return false;" class="active">ADD ITEM</a>
+            <a href="{% url 'manageTables:splitBills' table_id %}" class="active">CLOSEOUT</a>
+            <a href="#"><strong>Total: $ {{subtotal|floatformat:2}}</strong></a>
+        </div>
+
+        <script>
+                function openForm() {document.getElementById("myForm").style.display = "block";}
+
+                function closeForm() {document.getElementById("myForm").style.display = "none";}
+
+                function showDescription(x) {document.getElementById(x).style.display = "block";}
+
+                function closeDescription(x) {document.getElementById(x).style.display = "none";}
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            var append_index = {{c_list_index}};
+            setInterval(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'manageTables:updateCustomers' %}",
+                    data: {'append_index': append_index,'table_id':{{table_id}}}
+                })
+                .done(function(response) {
+                    $('#_cbody').replaceWith(response);
+                    append_index += 0;
+            })}, 10000)
+        </script>
+
+    </body>
+</html>

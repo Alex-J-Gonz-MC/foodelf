@@ -1,0 +1,168 @@
+body {background-color:white;}
+h1 {text-align:center;}
+table {text-align:center;
+       margin-left:30%;}
+
+button {background-color: #19C496;
+        border-radius: 9px;
+        font-family: Quicksand-Regular;
+        font-size: 30px;
+        color: white;
+        padding: 12px 18px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;}
+.center {display: block;
+         margin-left: auto;
+         margin-right: auto;}
+* {
+        box-sizing: border-box;
+  }
+
+body {
+      font-family: Quicksand-Regular;
+      }
+        /*------------------ Begin Create PopUp Form -------------------------------------*/
+        /* Button used to open the contact form - fixed at the bottom of the page */
+                .open-button {
+                  background-color: #555;
+                  color: white;
+                  padding: 16px 20px;
+                  border: none;
+                  cursor: pointer;
+                  opacity: 0.8;
+                  position: fixed;
+                  bottom: 23px;
+                  right: 28px;
+                  width: 280px;
+                }
+
+                /* The popup form - hidden by default */
+                .form-popup {
+                  display: none;
+                  position: fixed;
+                  border: 3px solid #f1f1f1;
+                  padding:0;
+                  margin:auto;
+                  top:0;
+                  left:0;
+                  width: 100%;
+                  height: 100%;
+                  background:rgba(255,255,255,0.7);
+                  z-index: 100;
+                }
+
+                /* Add styles to the form container */
+                .form-container {
+                  max-width: 300px;
+                  padding: 10px;
+                  background-color: white;
+                  z-index: 101;
+                }
+
+                /* Full-width input fields */
+                .form-container input[type=text], .form-container input[type=password] {
+                  width: 100%;
+                  padding: 15px;
+                  margin: 5px 0 22px 0;
+                  border: none;
+                  background: #f1f1f1;
+                }
+
+                /* When the inputs get focus, do something */
+                .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+                  background-color: #ddd;
+                  outline: none;
+                }
+
+                /* Set a style for the submit/login button */
+                .form-container .btn {
+                  background-color: #4CAF50;
+                  color: white;
+                  padding: 16px 20px;
+                  border: none;
+                  cursor: pointer;
+                  width: 100%;
+                  margin-bottom:10px;
+                  opacity: 0.8;
+                }
+
+                /* Add a red background color to the cancel button */
+                .form-container .cancel {
+                  background-color: red;
+                }
+
+                /* Add some hover effects to buttons */
+                .form-container .btn:hover, .open-button:hover {
+                  opacity: 1;
+                }
+          /*------------------ End Create PopUp Form -------------------------------------*/
+
+
+            /* Float four columns side by side */
+            .column {
+                      float: left;
+                      width: 25%;
+                      padding: 0 10px;
+                    }
+
+            /* Remove extra left and right margins, due to padding */
+            .row {margin: 0 -5px;}
+
+            /* Clear floats after the columns */
+            .row:after {content: "";
+                        display: table;
+                        clear: both;
+                        }
+
+            /* Responsive columns */
+            @media screen and (max-width: 600px) {
+            .column {width: 100%;
+                    display: block;
+                    margin-bottom: 20px;
+                    }
+                }
+
+            /* Style the counter cards */
+            .card {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                    padding: 16px;
+                    text-align: center;
+                    background-color: #19C496;
+                    margin-top: 10px;
+                    border-radius: 9px;
+                    margin-bottom: 10px;
+                    color: black;
+                    }
+
+            .card:hover {display: block;
+                         background-color: #6BEFCC;
+                         color: #E1FBF4;}
+
+        /*-------    NAVIGATION BAR    -------*/
+            .navbar {overflow: hidden;
+                     background-color: #19C496;
+                     position: fixed;
+                     bottom: 0;
+                     width: 100%;
+                     color: #1D6055;
+                     font-family: Quicksand-Regular;}
+
+            .navbar a {float: left;
+                       display: block;
+                       color: #1D6055;
+                       text-align: center;
+                       padding: 14px 16px;
+                       text-decoration: none;
+                       font-size: 17px;}
+
+            .navbar a:hover {background: #6BEFCC;
+                             color: #E1FBF4;}
+            .navbar a.active:hover {background: #6BEFCC;
+                             color: #E1FBF4;}
+
+            .navbar a.home {background-color: #1D6055;
+                              color: #19C496;}
+            .navbar a.active {background-color: #19C496;
+                              color: #1D6055;
+                              border-right: none;}

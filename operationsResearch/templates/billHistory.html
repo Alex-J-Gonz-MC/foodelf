@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Bill History</title>
+    </head>
+    <body>
+        {% for bill in bills %}
+        <p> Server: {{bill.server.name}}</p>
+        <p> Customers: {{bill.customers}}</p>
+        <p> Items: {{bill.items}}</p>
+        <p> Date: {{bill.date}}</p>
+        <p> Time Seated: {{bill.time_seated}} minutes</p>
+        {% endfor %}
+    </body>
+    
+</html>

@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title>Purchase History</title>
+    <style type="text/css">
+    @font-face {
+        font-family: Quicksand-Regular;
+        {% load static %}
+        src: url({% static "home/fonts/Quicksand-Regular.otf" %});
+    }
+            h1 {text-align:center;
+            font-family: Quicksand-Regular;}
+            table {text-align:center;
+                   margin-left:10%;
+                   font-size:15px;
+                   font-family: Quicksand-Regular;
+                 }
+        </style>
+</head>
+<body>
+    {% load static %}
+    <h1>Purchase History</h1>
+
+
+        <table width="80%" border="1" cellpadding="1" >
+            <tr>
+                <th>Order No.</th>
+                <th>ITEM #</th>
+                <th>NAME</th>
+                <th>QUANTITY</th>
+                <th>DATE</th>
+            </tr>
+            {% for choice in choice_history %}
+                <tr>
+                    <td>{{choice.id}}</td>
+                    <td>{{choice.item.id}}</td>
+                    <td>{{choice.item.item_name}}</td>
+                    <td>{{choice.quantity}}</td>
+                    <td>{{choice.date}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    <a href="{% url 'home:index' %}">Back To Menu</a>
+</body>
+
+</html>

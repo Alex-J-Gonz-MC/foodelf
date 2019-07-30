@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>Purchase History</title>
+    <style type="text/css">
+            h1 {text-align:center;}
+            table {text-align:center;
+                   margin-left:10%;
+                   font-size:15px;}
+        </style>
+</head>
+<body>
+    <h1>Purchase History</h1>
+
+    
+        <table width="80%" border="1" cellpadding="1" >
+            <tr>
+                <th>Order No.</th>
+                <th>ITEM #</th>
+                <th>NAME</th>
+                <th>QUANTITY</th>
+                <th>DATE</th>
+            </tr>
+            {% for choice in choice_history %}
+                <tr>
+                    <td>{{choice.id}}</td>
+                    <td>{{choice.item.id}}</td>
+                    <td>{{choice.item.item_name}}</td>
+                    <td>{{choice.quantity}}</td>
+                    <td>{{choice.date}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    <a href="{% url 'home:index' %}">Back To Menu</a>
+</body>
+
+</html>

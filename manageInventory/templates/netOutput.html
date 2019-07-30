@@ -1,0 +1,25 @@
+{% load static %}
+{% load humanize %}
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <h2 style="text-align:center;">Suggested Items</h2>
+        <table width="70%" style="margin-left:15%;">
+            <tr>
+                <th>Item ID</th>
+                <th>Item Name</th>
+                <th>Item Price</th>
+                <th>Item Ingredients</th>
+            </tr>
+            {% for out in output %}
+                <tr>
+                    <td>{{out.item_id}}</td>
+                    <td>{{out.item_name}}</td>
+                    <td>$ {{out.price|floatformat:2}}</td>
+                    <td>{{out.ingredients}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
